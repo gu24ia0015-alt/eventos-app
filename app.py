@@ -98,6 +98,23 @@ def editar_evento(id):
             )
     return redirect(url_for("eventos"))
 
+#BLOQUE 5
+@app.route("/eventos/eliminar/<int:id>", methods=["POST"])
+def eliminar_evento(id):
+    global lista_eventos
+    lista_eventos = [e for e in lista_eventos if e["id"] != id]
+    return redirect(url_for("eventos"))
+
+@app.route("/cotizador")
+def cotizador():
+    return render_template("cotizador.html")
+
+def calcular_precio(tipo, personas, decoracion):
+    base = {"Boda": 200, "Cumpleanos": 100, "Graduacion": 120, "Corporativo": 180}
+    deco = {"Floral": 50, "Elegante": 80, "Globos": 30, "Minimalista": 40}
+    precio_base = base.get(tipo, 100)
+    precio_deco = deco.get(decoracion, 30)
+    return (precio_base + precio_deco) * personas
 
 
 if __name__ == "__main__":
