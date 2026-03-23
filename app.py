@@ -34,5 +34,15 @@ lista_eventos = [
 
 siguiente_id = 4
 
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+@app.route("/eventos")
+def eventos():
+    return render_template("eventos.html", eventos=lista_eventos)
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
