@@ -1,3 +1,5 @@
+# BLOQUE 1
+
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -34,6 +36,9 @@ lista_eventos = [
 
 siguiente_id = 4
 
+
+
+# BLOQUE 2
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -42,6 +47,10 @@ def index():
 def eventos():
     return render_template("eventos.html", eventos=lista_eventos)
 
+
+
+
+# BLOQUE 3
 @app.route("/eventos/nuevo", methods=["GET"])
 def nuevo_evento_form():
     return render_template("nuevo_evento.html")
@@ -65,6 +74,31 @@ def nuevo_evento():
     lista_eventos.append(evento)
     siguiente_id += 1
     return redirect(url_for("eventos"))
+
+
+#BLOQUE 4
+@app.route("/eventos/editar/<int:id>", methods=["GET"])
+def editar_evento_form(id):
+    evento = next((e for e in lista_eventos if e["id"] == id), None)
+    return render_template("editar_evento.html", evento=evento)
+
+@app.route("/eventos/editar/<int:id>", methods=["POST"])
+def editar_evento(id):
+    for evento in lista_eventos:
+        if evento["id"] == id:
+            evento["nombre"] = request.form["nombre"]
+            evento["tipo"] = request.form["tipo"]
+            evento["fecha"] = request.form["fecha"]
+            evento["personas"] = int(request.form["personas"])
+            evento["decoracion"] = request.form["decoracion"]
+            evento["precio"] = calcular_precio(
+                request.form["tipo"],
+                int(request.form["personas"]),
+                request.form["decoracion"]
+            )
+    return redirect(url_for("eventos"))
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
