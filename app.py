@@ -42,7 +42,29 @@ def index():
 def eventos():
     return render_template("eventos.html", eventos=lista_eventos)
 
+@app.route("/eventos/nuevo", methods=["GET"])
+def nuevo_evento_form():
+    return render_template("nuevo_evento.html")
 
+@app.route("/eventos/nuevo", methods=["POST"])
+def nuevo_evento():
+    global siguiente_id
+    evento = {
+        "id": siguiente_id,
+        "nombre": request.form["nombre"],
+        "tipo": request.form["tipo"],
+        "fecha": request.form["fecha"],
+        "personas": int(request.form["personas"]),
+        "decoracion": request.form["decoracion"],
+        "precio": calcular_precio(
+            request.form["tipo"],
+            int(request.form["personas"]),
+            request.form["decoracion"]
+        )
+    }
+    lista_eventos.append(evento)
+    siguiente_id += 1
+    return redirect(url_for("eventos"))
 
 if __name__ == "__main__":
     app.run(debug=True)
