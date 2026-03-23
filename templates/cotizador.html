@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container">
+    <div class="card-simulador">
+        <h2>✨ Simulador de Evento</h2>
+        <p>Elige tus opciones y obtén un precio aproximado al instante.</p>
+
+        <div class="form-group">
+            <label>Tipo de Evento:</label>
+            <select id="tipo_simulador" onchange="simularPresupuesto()">
+                <option value="Boda">Boda</option>
+                <option value="Cumpleanos">Cumpleaños</option>
+                <option value="Graduacion">Graduación</option>
+                <option value="Corporativo">Evento Corporativo</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Número de Personas:</label>
+            <input type="number" id="personas_simulador" placeholder="Ej. 100" oninput="simularPresupuesto()">
+        </div>
+
+        <div class="form-group">
+            <label>Estilo de Decoración:</label>
+            <select id="deco_simulador" onchange="simularPresupuesto()">
+                <option value="Floral">Floral</option>
+                <option value="Elegante">Elegante</option>
+                <option value="Globos">Globos</option>
+                <option value="Minimalista">Minimalista</option>
+            </select>
+        </div>
+
+        <div id="resultado_simulacion" class="resultado-box">
+            </div>
+    </div>
+</section>
+{% endblock %}
