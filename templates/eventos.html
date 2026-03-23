@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="container">
+    <h2>Catálogo de Eventos Próximos</h2>
+    <a href="{{ url_for('nuevo_evento_form') }}" class="btn-add">+ Registrar Nuevo Evento</a>
+
+    <div class="grid-eventos">
+        {% for evento in eventos %}
+        <div class="card-evento">
+            <h3>{{ evento.nombre }}</h3>
+            <p><strong>Tipo:</strong> {{ evento.tipo }}</p>
+            <p><strong>Fecha:</strong> {{ evento.fecha }}</p>
+            <p><strong>Invitados:</strong> {{ evento.personas }}</p>
+            <p><strong>Decoración:</strong> {{ evento.decoracion }}</p>
+            <p class="precio">Precio Estimado: ${{ "{:,.2f}".format(evento.precio) }}</p>
+            
+            <div class="acciones">
+                <a href="{{ url_for('editar_evento_form', id=evento.id) }}" class="btn-edit">Editar</a>
+                
+                <form action="{{ url_for('eliminar_evento', id=evento.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn-delete" onclick="return confirm('¿Seguro que quieres eliminar este evento?')">Eliminar</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

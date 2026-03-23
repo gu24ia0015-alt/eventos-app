@@ -1,0 +1,104 @@
+/* 1. Variables Globales: Para mantener la coherencia del diseño elegante */
+:root {
+    --dorado: #D4AF37;
+    --oscuro: #1A1A1A;
+    --crema: #FAF9F6;
+    --blanco: #FFFFFF;
+    --sombra: rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Estilos Base */
+body {
+    font-family: 'Playfair Display', serif; /* Fuente elegante */
+    background-color: var(--crema);
+    color: var(--oscuro);
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* 3. Navegación (Header) */
+header {
+    background-color: var(--oscuro);
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 40px;
+    margin: 0;
+}
+
+nav a {
+    color: var(--dorado);
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: var(--blanco);
+    letter-spacing: 1px;
+}
+
+/* 4. Sección Hero (Inicio) */
+.hero {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    color: var(--blanco);
+    text-align: center;
+}
+
+/* 5. Tarjetas del Catálogo (Grid) */
+.grid-eventos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 40px;
+}
+
+.card-evento {
+    background: var(--blanco);
+    padding: 25px;
+    border-radius: 15px; /* Botones y bordes redondeados */
+    box-shadow: 0 10px 30px var(--sombra); /* Sombras suaves */
+    transition: transform 0.3s ease;
+}
+
+.card-evento:hover {
+    transform: translateY(-10px); /* Animación ligera al hacer scroll/hover */
+}
+
+/* 6. Botones Elegantes */
+.btn-principal, .btn-add, .btn-edit {
+    background-color: var(--dorado);
+    color: var(--blanco);
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #c0392b;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+}
